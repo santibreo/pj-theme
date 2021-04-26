@@ -1,0 +1,51 @@
+{#
+    Basic profile information and photo
+#}
+
+<div class="cv-info">
+    <div class="cv-main">
+        <img src="{{ './_static/' ~ theme_cv_profile_pic }}" alt="Profile Image">
+        {% if theme_cv_name != None and theme_cv_surname != None %}
+        <h3>
+            {{- theme_cv_name }}
+            <br><span class="cv-surname">{{ theme_cv_surname }}</span>
+        </h3>
+        {% else %}
+        <h5>{{ author }}</h5>
+        {% endif %}
+        <p>{{ theme_cv_job_position }}</p>
+        {%- if theme_cv_phone != None or theme_cv_location != None %}
+        <p>
+            {%- if theme_cv_phone != None %}
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            &nbsp;{{ theme_cv_phone }}
+            {%- if theme_cv_location != None %}&emsp;&#x7c;&emsp;{%- endif %}
+            {%- endif %}
+            {%- if theme_cv_location != None %}
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            &nbsp;{{ theme_cv_location }}
+            {%- endif %}
+        </p>
+        {% endif %}
+    </div>
+    {%- if theme_cv_main_info != None %}
+    {%- for key, out_value in theme_cv_main_info.items() %}
+    <h4>{{ key | capitalize }}:</h4>
+        <ul>
+        {%- for key, value in out_value.items() %}
+        <li><b>{{ key | capitalize }}</b>:
+            {%- if value | int(-1) == -1 %}
+            {{ value }}
+            {%- else %}
+            <div class="progress-bar-out">
+                <div class="progress-bar-in" style="{{ 'width:'~ value ~'0%'}}">
+                    {{ value }}/10
+                </div>
+            </div>
+            {%- endif %}
+        </li>
+        {%- endfor %}
+        </ul>
+    {%- endfor %}
+    {%- endif %}
+</div>

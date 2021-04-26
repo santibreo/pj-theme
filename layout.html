@@ -1,0 +1,121 @@
+{%- extends "basic/layout.html" %}
+
+{%- block extrahead %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  {% if theme_touch_icon %}
+    <link rel="apple-touch-icon" href="{{ pathto('_static/' ~ theme_touch_icon, 1) }}" />
+  {% endif %}
+  {% if theme_canonical_url %}
+    <link rel="canonical" href="{{ theme_canonical_url }}{{ pagename }}.html"/>
+  {% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+{% endblock %}
+
+{%- macro pj_sidebar() %}
+    {%- if sidebars != None %}
+        {#- new style sidebar: explicitly include/exclude templates #}
+        {%- for sidebartemplate in sidebars %}
+            {%- include sidebartemplate %}
+        {%- endfor %}
+    {%- else %}
+    {#- old style sidebars: using blocks -- should be deprecated #}
+        {%- block sidebartoc %}
+        {%- include "localtoc.html" %}
+        {%- endblock %}
+        {%- block sidebarrel %}
+        {%- include "relations.html" %}
+        {%- endblock %}
+        {%- block sidebarsourcelink %}
+        {%- include "sourcelink.html" %}
+        {%- endblock %}
+        {%- if customsidebar %}
+            {%- include customsidebar %}
+        {%- endif %}
+        {%- block sidebarsearch %}
+        {%- include "searchbox.html" %}
+        {%- endblock %}
+    {%- endif %}
+{%- endmacro %}
+
+{# removed existing top+bottom related nav, and embed in sidebar #}
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+
+{# nav should appear before content, not after #}
+{%- block content %}
+    <header>
+        <div class="logo-box">
+            <svg height="70" width="26">
+            <path d="M 3 59
+                     l 0 -42
+                     A 10 10 1 0 1 23 17
+                     l 0 37
+                     A 7 7 1 0 1 9 54
+                     l 0 -30
+                     A 5 5 1 0 1 19 24
+                     l 0 20" stroke="black" stroke-width="2" fill="none"/>
+            </svg>
+            <a href="{{ pathto(master_doc) }}">
+                {{- '<br>'.join(theme_owner.split()) ~ "'s" }}<br>
+                <span style="font-family:PT Serif Caption; color:var(--special-words); font-size:20px">
+                    notes
+                </span>
+            </a>
+        </div>
+        <input id="nav-toggle" type="checkbox" class="nav-toggle">
+        <nav>
+            <ul>
+                <li><a href={{ pathto("cv") }}>CV</a></li>
+                <li><a href={{ pathto("about") }}>About</a></li>
+                <li><a href={{ pathto("recommendations") }}>Recommendations</a></li>
+            </ul>
+        </nav>
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span class="nav-toggle-m1 nav-toggle-mvert"></span>
+            <span class="nav-toggle-m2 nav-toggle-mdiag"></span>
+            <span class="nav-toggle-m3 nav-toggle-mdiag"></span>
+            <span class="nav-toggle-m4 nav-toggle-mvert"></span>
+        </label>
+    </header>
+    <div class="container">
+        {% if render_sidebar %}
+        <input id="sidebar-toggle" type="checkbox" class="sidebar-toggle">
+        <div class="sidebar">{{ pj_sidebar() }}</div>
+        <label for="sidebar-toggle" class="sidebar-toggle-label">
+            <span></span>
+        </label>
+        {% endif %}
+        <div class="content">
+        {% block body %} {% endblock %}
+        </div>
+    </div>
+{%- endblock %}
+
+{%- block footer %}
+    <div class="footer">
+      {%- if show_copyright %}&copy;{{ copyright }}.{% endif %}
+      {%- if theme_show_powered_by|lower == 'true' %}
+       Powered by:&nbsp;<a href="http://sphinx-doc.org/">Sphinx {{ sphinx_version }}</a>
+       &nbsp;&amp;&nbsp;<a href="https://github.com/santibreo">PJnotes {{ pjnotes_version }}</a>
+      {% endif %}
+    </div>
+
+    {% if theme_analytics_id %}
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{ theme_analytics_id }}']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    {% endif %}
+{%- endblock %}
