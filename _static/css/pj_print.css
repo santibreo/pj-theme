@@ -1,0 +1,43 @@
+header, .footer {
+    display: none;
+}
+
+.container {
+    padding: 0px;
+}
+
+.sidebar-toggle-label,
+div#searchbox,
+.sidebar > h3,
+.sidebar > h3 > a {
+    display: none !important;
+}
+
+.sidebar li.toc-visible {
+    list-style-type: circle;
+    font-weight: unset;
+    transform: unset;
+    transition: unset;
+}
+
+.sidebar {
+    all: unset;
+    width: 35%;
+    padding-inline: 1em;
+}
+
+.sidebar * {
+    opacity: 1;
+}
+
+.progress-bar-in {
+    height: 1.4em;
+    margin-top: -0.05em;
+    margin-left: -1px;
+    border: 2px solid black;
+}
+
+.progress-bar-out {
+    border: dotted 1px;
+    height: 1.3em;
+}

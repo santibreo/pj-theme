@@ -128,18 +128,21 @@ def process_posts_nodes(app, doctree, fromdocname):
             if not post.title:
                 continue
             # Post tag + title
-            post_id = ''
+            post_group = ''
             if post.group:
-                post_id = f'<span class="post-group">{post.group}</span>'
-            post_id += f'<span class="post-title">{post.title}</span>'
+                post_group = f'<span class="post-group">{post.group}</span>'
+            post_title = f'<span class="post-title">{post.title}</span>'
             # Post date
             post_date = ('<span class="post-date">'
                          f'{post.date.strftime("%d/%m/%Y")}</span>')
             # Post link
             post_link = app.project.path2doc(post.path) + ".html"
             # All together
-            output += (f'<li><a href="{post_link}">{post_id}{post_date}</a>'
-                       '</li>')
+            output += (
+                f'<li><a href="{post_link}"><div class="post-entry">'
+                f'{post_group}{post_date}{post_title} '
+                '</div></a></li>'
+            )
         output += "</ul>"
         posts_node.replace_self(nodes.raw("", output, format="html"))
 

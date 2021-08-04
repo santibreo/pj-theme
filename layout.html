@@ -3,6 +3,7 @@
 {%- block extrahead %}
   {{ super() }}
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ pathto('_static/css/pj_print.css', 1) }}" media="print", type="text/css" />
   {% if theme_touch_icon %}
     <link rel="apple-touch-icon" href="{{ pathto('_static/' ~ theme_touch_icon, 1) }}" />
   {% endif %}

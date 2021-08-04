@@ -4,7 +4,7 @@
 :root {
     --header-background: rgba(221, 221, 221, 0.88);
     --global-background: rgb(221, 221, 221);
-    --content-background: rgb(215, 215, 215);
+    --content-background: rgb(205, 205, 205);
     --menu-background: rgba(221, 221, 221, 0.9);
     --code-background: rgba(60, 60, 60);
     --hs-font: #202020;
@@ -20,6 +20,7 @@
     --error-bg-color: rgba(224, 49, 75, 0.1);
     --special-words: #ad3939;
     --link: #1f8bba;
+    --highlight-color: #999e1a;
     --header-height: 90px;
     --mobile-padding: 3vw;
     --desktop-padding: 18vw;
@@ -31,7 +32,7 @@
     :root {
         --header-background: rgba(34, 34, 34, 0.88);
         --global-background: rgb(34, 34, 34);
-        --content-background: rgb(40, 40, 40);
+        --content-background: rgb(42, 42, 42);
         --code-background: rgba(34, 34, 34);
         --menu-background: rgba(34, 34, 34, 0.9);
         --hs-font: #e8e8e8;
@@ -87,8 +88,17 @@ a:hover {
     text-decoration: underline;
 }
 
+.headerlink {
+    color: #1f8bba1a;
+}
+
 .headerlink:hover {
     text-decoration: none;
+}
+
+/* HIGHLIGHT SEARCH */
+span.highlighted {
+    outline: 1px solid var(--highlight-color);
 }
 
 /* EQUATIONS */
@@ -109,6 +119,11 @@ div.math {
 }
 
 /* TABLES */
+.hscroll-table {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 table:not(.highlighttable),
 table:not(.highlighttable) th,
 table:not(.highlighttable) td {
@@ -119,14 +134,17 @@ table:not(.highlighttable) td {
     margin-inline: auto;
 }
 
+/* LISTS */
+ol, ul {
+    padding-inline-start: 15px;
+}
+
 /* BLOCKQUOTES */
 blockquote::before {
     content: open-quote;
     font-size: 50px;
     height: 30px;
     margin-right: 0.15em;
-    /* position: absolute; */
-    /* margin-bottom: 1em; */
 }
 
 blockquote {
@@ -250,6 +268,12 @@ ul.search > li > a, .posts-list > li > a{
     align-items: center;
 }
 
+div.post-entry {
+    display: flex;
+    flex-wrap: wrap;
+    margin-block: 0.3em;
+}
+
 span.post-group {
     margin-left: 0.6em;
     font-weight: bold;
@@ -257,14 +281,17 @@ span.post-group {
     border-right: 2px solid var(--hs-font);
 }
 
+span.post-date {
+    font-size: 0.8em;
+    margin-left: 0.6em;
+    margin-top: 0.23em;
+    color: var(--body-font);
+}
+
 span.post-title {
     margin-left: 0.6em;
     margin-right: auto;
-}
-
-span.post-date {
-    font-size: 0.8em;
-    color: var(--body-font);
+    width: 100%;
 }
 
 /*=============================================================================
@@ -308,7 +335,7 @@ CONTENT APPEARANCE
 .footer {
     align-items: center;
     justify-content: flex-end;
-    font-size: 0.7em;
+    font-size: calc(0.4em + 0.8vw);
     height: 1.1em;
 }
 
@@ -368,7 +395,7 @@ CV APPEARANCE
 
 .progress-bar-out {
     display: inline-block;
-    border: solid 1px;
+    background: var(--content-background);
     border-radius: 0.6em;
     width: -webkit-fill-available;
     margin-top: 0.3em;
@@ -386,7 +413,7 @@ CV APPEARANCE
     font-family: helvetica;
 }
 
-ul.cv-apptitudes {
+ul.cv-aptitudes {
     margin: unset;
     padding: unset;
     display: flex;
@@ -395,7 +422,7 @@ ul.cv-apptitudes {
     list-style-type: none;
 }
 
-li.cv-apptitude {
+li.cv-aptitude {
     margin: unset;
     margin-bottom: 0.4em;
     width: calc(96% / 4);
@@ -404,14 +431,14 @@ li.cv-apptitude {
     justify-content: space-between;
 }
 
-li.cv-apptitude p {
+li.cv-aptitude p {
     margin: 0;
     border-bottom: 3px solid var(--progress-bar);
     width: 100%;
     margin-inline-start: 1em;
 }
 
-li.cv-apptitude span{
+li.cv-aptitude span{
     border-bottom: 3px solid var(--global-background);
     flex: auto;
 }
@@ -500,7 +527,7 @@ nav a {
 }
 
 nav a:hover {
-  color: ;
+  color: unset;
 }
 
 /* changed this from the tutorial video to
