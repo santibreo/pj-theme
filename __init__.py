@@ -36,8 +36,10 @@ def update_context(app, pagename, templatename, context, doctree):
 def copy_custom_files(app, exc=None):
     if app.builder.format == 'html' and not exc:
         html_staticdir = os.path.join(app.builder.outdir, '_static')
+        source_staticdir = os.path.join(app.builder.srcdir, '_static')
         pjno_staticdir = os.path.join(get_path(), "_static")
         copy_tree(pjno_staticdir, html_staticdir)
+        copy_tree(source_staticdir, html_staticdir)
 
 def setup(app):
     # add_html_theme is new in Sphinx 1.6+
