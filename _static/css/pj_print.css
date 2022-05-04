@@ -41,3 +41,12 @@ div#searchbox,
     border: dotted 1px;
     height: 1.3em;
 }
+
+/* Breaks */
+h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+}
+
+table, img, svg {
+    break-inside: avoid;
+}
