@@ -47,7 +47,7 @@ class Post:
         Extracts the title from any .rst document
         """
         attr_pattern = r":([A-Za-z_-]+):\s*([A-Za-z0-9-/]+)"
-        with open(self.path) as fff:
+        with open(self.path, encoding="latin-1") as fff:
             lines = iter(fff.readlines())
             try:
                 while not self.title:
