@@ -76,6 +76,7 @@ body {
 
 p, li {
     text-align: justify;
+    overflow-wrap: break-word;
 }
 
 /* HYPERLINKS */
@@ -190,6 +191,7 @@ td.code {
     padding-inline: 10px;
     font-family: Helvetica;
     font-weight: 500;
+    margin-block: 1ex;
 }
 
 .admonition p {
