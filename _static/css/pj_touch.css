@@ -437,10 +437,23 @@ li.cv-aptitude {
     width: calc(96% / 4);
     min-width: 150px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 li.cv-aptitude p {
+    margin: 0;
+    width: 100%;
+    margin-inline-start: 1em;
+}
+
+li.cv-aptitude div.progress-bar {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+li.cv-aptitude span.progress {
     margin: 0;
     border-bottom: 3px solid var(--progress-bar);
     width: 100%;

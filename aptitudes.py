@@ -71,8 +71,11 @@ def process_aptitudes_nodes(app, doctree, fromdocname):
             # All together
             output += (
                 f'<li class="cv-aptitude">'
-                f'<p style="width:{appt.score * 10}%;">{appt.name}</p>'
+                f'<p>{appt.name}</p>'
+                '<div class="progress-bar">'
+                f'<span class="progress" style="max-width:{appt.score * 10}%;"></span>'
                 '<span></span>'
+                '</div>'
                 '</li>'
             )
         output += "</ul>"

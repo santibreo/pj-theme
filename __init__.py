@@ -1,14 +1,13 @@
 import os
-from docutils.parsers.rst import Directive, directives
 from distutils.dir_util import copy_tree
-from pjnotes_theme.posts import (
+from sphinx_pjnotes_theme.posts import (
     Posts,
     PostsDirective,
     process_posts_nodes,
     visit_Posts_node,
     depart_Posts_node
 )
-from pjnotes_theme.aptitudes import (
+from sphinx_pjnotes_theme.aptitudes import (
     Aptitudes,
     AptitudesDirective,
     process_aptitudes_nodes
