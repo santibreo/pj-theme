@@ -819,6 +819,7 @@ SIDEBAR APPEARANCE
     .content {
         max-width: unset;
         width: -webkit-fill-available;
+        overflow: auto;
     }
 
     .nav-toggle-label {
