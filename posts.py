@@ -78,12 +78,7 @@ class Posts(nodes.Admonition, nodes.Element):
                 post = Post(file_path)
                 # Group
                 post.group = parent
-                # Printing
-                #print("=" * 50)
-                #print(post.title)
-                #print(post.date)
-                #print(post.meta)
-                #print("=" * 50)
+                # Ignore drafts
                 if not post.meta.get("draft"):
                     posts.append(post)
         return sorted(posts, key=lambda x: x.date.toordinal(), reverse=reverse)
@@ -121,9 +116,7 @@ def process_posts_nodes(app, doctree, fromdocname):
     for posts_node in doctree.traverse(Posts):
         output = '<ul class="posts-list">'
         posts_path = os.path.join(app.confdir, posts_node.rawsource)
-        posts = posts_node.get_posts(
-            posts_path,
-        )
+        posts = posts_node.get_posts(posts_path)
         for post in posts:
             if not post.title:
                 continue
