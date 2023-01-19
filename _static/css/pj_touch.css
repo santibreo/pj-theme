@@ -188,6 +188,7 @@ blockquote {
 pre, .pre {
     font-family: 'Red Hat Mono', monospace;
     font-size: 0.9em;
+    word-wrap: break-word;
 }
 
 pre {
