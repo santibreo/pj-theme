@@ -1,13 +1,13 @@
 import os
 from distutils.dir_util import copy_tree
-from sphinx_pjnotes_theme.posts import (
+from .posts import (
     Posts,
     PostsDirective,
     process_posts_nodes,
     visit_Posts_node,
     depart_Posts_node
 )
-from sphinx_pjnotes_theme.aptitudes import (
+from .aptitudes import (
     Aptitudes,
     AptitudesDirective,
     process_aptitudes_nodes
@@ -39,6 +39,7 @@ def copy_custom_files(app, exc=None):
         pjno_staticdir = os.path.join(get_path(), "_static")
         copy_tree(pjno_staticdir, html_staticdir)
         copy_tree(source_staticdir, html_staticdir)
+
 
 def setup(app):
     # add_html_theme is new in Sphinx 1.6+
