@@ -205,8 +205,15 @@ table.highlighttable {
 .linenos {
     width: 30px;
     background: var(--code-background);
+    user-select: none; /* Standard */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
 }
-
+span.linenos {
+    border-right: 1px solid;
+    margin-right: 1em;
+}
 td.code {
     overflow: auto;
     background: var(--code-background);
