@@ -104,8 +104,9 @@ class PostsDirective(Directive):
     def run(self):
         #posts = self.get_posts(self.options["path"])
         posts_node = Posts(self.arguments[0])
-        self.state.nested_parse(self.content, self.content_offset,
-                                posts_node)
+        self.state.nested_parse(
+            self.content, self.content_offset, posts_node
+        )
         return [posts_node]
 
 

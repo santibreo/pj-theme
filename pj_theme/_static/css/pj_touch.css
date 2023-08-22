@@ -185,6 +185,10 @@ blockquote {
 }
 
 /* CODE */
+div.highlight {
+    background-color: var(--code-background);
+}
+
 pre, .pre {
     font-family: 'Red Hat Mono', monospace;
     font-size: 0.9em;
@@ -197,9 +201,18 @@ pre {
     overflow: auto;
 }
 
+
 table.highlighttable {
     width: 100%;
     table-layout: fixed;
+}
+
+table.highlighttable pre {
+    margin: 0.2em 0px;
+}
+
+table.highlighttable td.code {
+    border-left: 1px solid var(--progress-bar);
 }
 
 .linenos {
@@ -217,6 +230,7 @@ span.linenos {
 td.code {
     overflow: auto;
     background: var(--code-background);
+    padding-left: 0.2em;
 }
 
 .footnote * {

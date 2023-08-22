@@ -120,11 +120,13 @@
             event.originalEvent.clipboardData.setData("text/plain", copied_text);
             event.originalEvent.preventDefault();
         };
+        /*
         $(document).ready(function() {
                 $('div.highlight').children('pre').attr({'manually-modified': "true"});
                 $('div.highlight').children('pre').bind('copy', copyListener)
             }
         )
+        */
     </script>
     {% if theme_analytics_id %}
     <script type="text/javascript">
