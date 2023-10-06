@@ -461,6 +461,7 @@ CV APPEARANCE
     flex-grow: 2;
     margin-top: 0.3em;
     height: 0.9em;
+    width: -webkit-fill-available;
 }
 
 .progress-bar-in {
