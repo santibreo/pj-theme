@@ -107,7 +107,8 @@ span.highlighted {
 /* EQUATIONS */
 div.math {
     max-width: 100%;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .underline-text {
