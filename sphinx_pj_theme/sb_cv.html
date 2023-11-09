@@ -2,6 +2,9 @@
     Basic profile information and photo
 #}
 
+{% set language = meta.get('language', theme_main_language) %}
+
+
 <div class="cv-info">
     <div class="cv-main">
         <div class="cv-main-picture">
@@ -16,7 +19,7 @@
             {% else %}
             <h5>{{ author }}</h5>
             {% endif %}
-            <p>{{ theme_cv_job_position }}</p>
+            <p>{{ theme_cv_job_position[language] }}</p>
             {%- if theme_cv_phone != None or theme_cv_location != None %}
             <p>
                 {%- if theme_cv_phone != None %}
@@ -34,7 +37,7 @@
     </div>
     {%- if theme_cv_main_info != None %}
     <div class="cv-useful-info">
-    {%- for key, out_value in theme_cv_main_info.items() %}
+    {%- for key, out_value in theme_cv_main_info[language].items() %}
         <div class="cv-useful-info-item">
             <h4>{{ key | capitalize }}:</h4>
             <ul>

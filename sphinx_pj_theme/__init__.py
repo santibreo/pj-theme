@@ -7,14 +7,37 @@ from .posts import (
     visit_Posts_node,
     depart_Posts_node
 )
-from .aptitudes import (
-    Aptitudes,
-    AptitudesDirective,
-    process_aptitudes_nodes
+from .cv import (
+    CVExperiencesDirective,
+    CVEducationsDirective,
+    CVCertificationsDirective,
+    CVSideProjectsDirective,
+    CVAptitudesDirective,
+    create_cv_node_processor,
 )
 
 __version_info__ = (1, 0, 0)
 __version__ = ".".join(map(str, __version_info__))
+
+
+LANGUAGE_FLAG_MAPPING = {
+    "spanish": '🇪🇸',
+    "español": '🇪🇸',
+    "es": '🇪🇸',
+    "english": '🇬🇧',
+    "inglés": '🇬🇧',
+    "en": '🇬🇧',
+}
+
+
+LANGUAGE_FILE_END_MAPPING = {
+    "spanish": '-es',
+    "español": '-es',
+    "es": '-es',
+    "english": '',
+    "inglés": '',
+    "en": '',
+}
 
 
 def get_path():
@@ -30,6 +53,8 @@ def update_context(app, pagename, templatename, context, doctree):
     Includes `pjnotes_version` in the context
     """
     context["pjnotes_version"] = __version__
+    context["language_flag_mapping"] = LANGUAGE_FLAG_MAPPING
+    context["language_file_end_mapping"] = LANGUAGE_FILE_END_MAPPING
 
 
 def copy_custom_files(app, exc=None):
@@ -46,21 +71,32 @@ def setup(app):
     if hasattr(app, "add_html_theme"):
         theme_path = os.path.abspath(os.path.dirname(__file__))
         app.add_html_theme("pjnotes_theme", theme_path)
+    app.connect("html-page-context", update_context)
     # Posts Nodes
     app.add_node(
         Posts,
         html=(visit_Posts_node, depart_Posts_node),
     )
     app.add_directive('posts', PostsDirective, override=True)
-    # Aptitudes Nodes
-    app.add_node(
-        Aptitudes,
-        html=(visit_Posts_node, depart_Posts_node),
-    )
-    app.add_directive('aptitudes', AptitudesDirective, override=True)
-    app.connect("html-page-context", update_context)
     app.connect("doctree-resolved", process_posts_nodes)
-    app.connect("doctree-resolved", process_aptitudes_nodes)
+    # CV Nodes
+    for (class_name, directive_str, directive) in [
+        ("experience", "cv-experiences", CVExperiencesDirective),
+        ("education", "cv-educations", CVEducationsDirective),
+        ("certification", "cv-certifications", CVCertificationsDirective),
+        ("side-project", "cv-side-projects", CVSideProjectsDirective),
+        ("aptitude", "cv-aptitudes", CVAptitudesDirective),
+    ]:
+        node_class = directive.node_class
+        app.add_node(
+            node_class,
+            html=(visit_Posts_node, depart_Posts_node),
+        )
+        app.add_directive(directive_str, directive, override=True)
+        process_func = create_cv_node_processor(node_class, class_name, directive_str)
+        app.connect("doctree-resolved", process_func)
+
+    # Copy static files
     app.connect('builder-inited', copy_custom_files)
     return {
         "version": __version__,

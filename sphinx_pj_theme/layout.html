@@ -40,6 +40,13 @@
     {%- endif %}
 {%- endmacro %}
 
+
+{%- macro path_with_lang_end(language) %}
+  {% set file_end = language_file_end_mapping[language] %}
+  {{- pagename.rsplit('-', 1)[0] ~ file_end ~ file_suffix -}}
+{%- endmacro %}
+
+
 {# removed existing top+bottom related nav, and embed in sidebar #}
 {%- block relbar1 %}{% endblock %}
 {%- block relbar2 %}{% endblock %}
@@ -89,6 +96,19 @@
         </label>
         {% endif %}
         <div class="content">
+        {%- if meta and 'languages' in meta %}
+          <select
+            id="language-selector"
+            class='language-picker'
+            onchange="window.location.href = this.value"
+          >
+            {%- for language in meta['languages'].split(',') %}
+            <option
+            value="{{- './' ~ path_with_lang_end(language) | trim }}"
+            >{{ language_flag_mapping[language] }}</option>
+            {% endfor %}
+          </select>
+        {% endif %}
         {% block body %} {% endblock %}
         </div>
     </div>
@@ -102,6 +122,7 @@
        &nbsp;&amp;&nbsp;<a href="https://github.com/santibreo/pj-theme">PJnotes {{ pjnotes_version }}</a>
       {% endif %}
     </div>
+    <script src="https://kit.fontawesome.com/9558133b44.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
         const copyListener = (event) => {
             const selection = document.getSelection();

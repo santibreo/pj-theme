@@ -5,13 +5,18 @@
 <hr>
 <div class="social-icons">
     {%- if theme_contact_email != None %}
-    {% set mail_link = "mailto:" ~ theme_contact_email ~ "?subject=We want to hire you" %}
+    {% set mail_link = "mailto:" ~ theme_contact_email ~ "?subject=We like your CV" %}
     <a href="{{ mail_link }}">
         <i class="fa fa-envelope"></i>
+        <p class="print-only">{{ theme_contact_email }}</p>
     </a>
     {% endif %}
     {% for key, link in theme_social_urls.items() %}
-    <a href={{ link }}><i class="fab fa-{{ key }}"></i></a>
+    <a href={{ link }}>
+        <i class="fab fa-{{ key }}"></i>
+        <p class="print-only">{{ link|replace("https://", "")|replace("www.", "") }}</p>
+
+    </a>
     {% endfor %}
 </div>
 <hr>

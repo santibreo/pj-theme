@@ -2,8 +2,8 @@ import os
 import re
 from datetime import datetime
 from dataclasses import dataclass
-from docutils.parsers.rst import Directive, directives
-#from sphinx.util.docutils import SphinxDirective
+from docutils.parsers.rst import directives
+from sphinx.util.docutils import SphinxDirective
 from docutils import nodes
 
 
@@ -39,6 +39,8 @@ class Post:
         elif "date" in key.lower():
             value_right = value.replace("-", "/")
             self.date = datetime.strptime(value_right, "%d/%m/%Y")
+        elif "," in value:
+            value = list(map(str.strip, value.split(',')))
         else:
             self.meta[key.lower()] = value
 
@@ -46,7 +48,7 @@ class Post:
         """
         Extracts the title from any .rst document
         """
-        attr_pattern = r":([A-Za-z_-]+):\s*([A-Za-z0-9-/]+)"
+        attr_pattern = r":([A-Za-z_-]+):\s*([A-Za-z0-9-/ ]+)"
         with open(self.path, encoding="latin-1") as fff:
             lines = iter(fff.readlines())
             try:
@@ -83,8 +85,10 @@ class Posts(nodes.Admonition, nodes.Element):
                     posts.append(post)
         return sorted(posts, key=lambda x: x.date.toordinal(), reverse=reverse)
 
+
 def visit_Posts_node(self, node):
     self.visit_admonition(node)
+
 
 def depart_Posts_node(self, node):
     self.depart_admonition(node)
@@ -93,7 +97,7 @@ def depart_Posts_node(self, node):
 ###############################################################################
 # Directive
 ###############################################################################
-class PostsDirective(Directive):
+class PostsDirective(SphinxDirective):
     required_arguments = 1
     optional_arguments = 1
     final_argument_whitespace = False

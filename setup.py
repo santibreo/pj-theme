@@ -2,31 +2,31 @@
 
 import codecs
 from setuptools import setup
-from pj_theme import __version__ as version
+from sphinx_pj_theme import __version__ as version
 
 # README into long description
 #with codecs.open("README.rst", encoding="utf-8") as f:
 #    readme = f.read()
 readme = ""
 
-code_ns = "santibreo/pj-theme"
+code_ns = "santibreo/sphinx-pj-theme"
 
 setup(
-    name="pj_theme",
+    name="sphinx_pj_theme",
     version=version,
     description="Sphinx theme for personal blogging site",
     long_description=readme,
     author="Santiago B. Pérez Pita",
     author_email="santibreo@gmail.com",
-    url="https://santibreo.github.io/pj-site/index.html",
+    url="https://santibreo.github.io/sphinx-pj-theme/index.html",
     #project_urls={
     #    "Source": f"https://github.com/{code_ns}",
     #    "Changelog": f"https://github.com/{code_ns}/blob/main/docs/changelog.rst",  # noqa
     #    "CI": f"https://app.circleci.com/pipelines/github/{code_ns}",
     #},
-    packages=["pj_theme"],
+    packages=["sphinx_pj_theme"],
     include_package_data=True,
-    entry_points={"sphinx.html_themes": ["sphinx-pjtheme=pj_theme"]},
+    entry_points={"sphinx.html_themes": ["sphinx-pj-theme=sphinx_pj_theme"]},
     python_requires=">=3.7",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
