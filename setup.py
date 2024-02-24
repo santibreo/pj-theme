@@ -26,7 +26,7 @@ setup(
     #},
     packages=["sphinx_pj_theme"],
     include_package_data=True,
-    entry_points={"sphinx.html_themes": ["sphinx-pj-theme=sphinx_pj_theme"]},
+    entry_points={"sphinx.html_themes": ["sphinx_pj_theme=sphinx_pj_theme"]},
     python_requires=">=3.7",
     classifiers=[
         "Development Status :: 5 - Production/Stable",

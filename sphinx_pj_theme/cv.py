@@ -14,6 +14,7 @@ from sphinx.util import logging
 
 logger = logging.getLogger(__name__)
 
+
 TECH_STACK_FA_ICON_MAP = {
     'Bash': '<i class="fa-solid fa-terminal"></i>',
     'Crowdstrike': '<i class="fa-solid fa-database"></i>',
@@ -56,11 +57,12 @@ def as_date(date_str: str) -> pd.Timestamp:
 
 
 def extract_from_toml(filepath: str, field: str) -> list[dict]:
+    """Extracts specific field from ``.toml`` file"""
     if not os.path.isfile(filepath):
         raise FileNotFoundError(f"Filepath '{filepath}' does not exist")
     if not filepath.endswith('toml'):
         raise TypeError(f"Filepath '{filepath}' is not a TOML file")
-    return tomllib.loads(Path(filepath).read_text()).get(field, [])
+    return tomllib.loads(Path(filepath).read_text(encoding='utf-8')).get(field, [])
 
 
 def parse_meta(meta: dict[str, str]):

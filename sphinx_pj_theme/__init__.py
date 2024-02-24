@@ -70,7 +70,7 @@ def setup(app):
     # add_html_theme is new in Sphinx 1.6+
     if hasattr(app, "add_html_theme"):
         theme_path = os.path.abspath(os.path.dirname(__file__))
-        app.add_html_theme("pjnotes_theme", theme_path)
+        app.add_html_theme("sphinx_pj_theme", theme_path)
     app.connect("html-page-context", update_context)
     # Posts Nodes
     app.add_node(

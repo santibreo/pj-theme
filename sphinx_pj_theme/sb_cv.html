@@ -8,7 +8,9 @@
 <div class="cv-info">
     <div class="cv-main">
         <div class="cv-main-picture">
-            <img src="{{ './_static/' ~ theme_cv_profile_pic }}" alt="Profile Image">
+          {% if theme_cv_profile_pic %}
+          <img src="{{ './_static/' ~ theme_cv_profile_pic }}" alt="Profile Image">
+          {% endif %}
         </div>
         <div class="cv-contact-info">
             {% if theme_cv_name != None and theme_cv_surname != None %}
