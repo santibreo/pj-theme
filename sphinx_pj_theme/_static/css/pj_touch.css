@@ -146,6 +146,7 @@ div.math {
 .content img {
     display: flex;
     margin: auto;
+    max-width: 100%;
 }
 
 .content img.pic-invert {
